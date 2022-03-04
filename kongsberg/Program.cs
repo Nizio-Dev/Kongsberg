@@ -1,36 +1,26 @@
 ﻿using kongsberg;
 using Newtonsoft.Json.Linq;
 
-bool optionChosen = false;
 
-SensorSimulator simulation = new SensorSimulator();
+JObject configOne = JObject.Parse(File.ReadAllText(@"../../../../simulationConfig1.json"));
+JObject configTwo = JObject.Parse(File.ReadAllText(@"../../../../simulationConfig2.json"));
 
-while (!optionChosen)
-{
-Console.Write(@$"Choose configuration for the simulation:
-1. Load sensors from a sensorConfig.json file.
-2. Proceed with static sensors.
-");
+SensorSimulator simulationFirst = new SensorSimulator(configOne);
+SensorSimulator simulationSecond = new SensorSimulator(configTwo);
 
-    switch (Console.ReadKey().KeyChar)
-    {
-        case '1':
-            JObject sensorData = JObject.Parse(File.ReadAllText(@"../../../../sensorConfig.json"));
-            simulation = new SensorSimulator(sensorData);
-            optionChosen = true;
-            break;
-        
-        case '2':
-            optionChosen = true;
-            break;
-    }
+simulationFirst.DeactivateReceiver(0);
+simulationFirst.DeactivateReceiver(1);
 
-    Console.Clear();
-}
+simulationSecond.DeactivateReceiver(0);
+simulationSecond.DeactivateReceiver(1);
 
-simulation.RunAsync();
+simulationSecond.ActivateReceiver(1);
+
+simulationFirst.RunAsync();
+simulationSecond.RunAsync();
 
 Console.WriteLine("Not blocked");
-//simulation.Stop();
+//simulationFirst.Stop();
+//simulationSecond.Stop();
 
 Console.ReadKey();

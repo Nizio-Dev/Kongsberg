@@ -24,5 +24,15 @@
       "EncoderType": "fixed",
       "Frequency": 10 //Hz
     }
+  ],
+  "Receivers": [
+    {
+      "ID": 1,
+      "IsActive": true
+    },
+    {
+      "ID": 2,
+      "IsActive": true
+    }
   ]
 }

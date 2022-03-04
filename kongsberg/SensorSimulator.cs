@@ -1,18 +1,14 @@
 ﻿using kongsberg.Sensors;
+using Kongsberg;
 using Newtonsoft.Json.Linq;
 
 namespace kongsberg;
 
 public class SensorSimulator
 {   
-    List<Sensor> Sensors { get; } = new List<Sensor>();
 
-    public SensorSimulator()
-    {
-        Sensors.Add(new Sensor(1, "Speed", "FIX", 2, -10, 100));
-        Sensors.Add(new Sensor(2, "Position", "FIX", 1, -10000, 10000));
-        Sensors.Add(new Sensor(3, "Depth", "FIX", 10, 0, 255));
-    }
+    List<Sensor> Sensors { get; } = new List<Sensor>();
+    List<Receiver> Receivers { get; } = new List<Receiver>();
 
     public SensorSimulator(JObject data)
     {
@@ -22,8 +18,39 @@ public class SensorSimulator
                 (string)sensor["EncoderType"]!, (int)sensor["Frequency"]!, 
                 (int)sensor["MinValue"]!, (int)sensor["MaxValue"]!));
         }
+
+
+        foreach(var receiver in data["Receivers"]!)
+        {
+            var newReceiver = new Receiver((int)receiver["ID"]!);
+            Receivers.Add(newReceiver);
+
+            if ((bool)receiver["IsActive"]!)
+            {
+                foreach(var sensor in Sensors)
+                {
+                    sensor.SensorDataObtained += newReceiver.OnSensorDataObtained!;
+                }
+            }
+            
+        }
     }
 
+    public void ActivateReceiver(int id)
+    {
+        foreach(var sensor in Sensors)
+        {
+            sensor.SensorDataObtained += Receivers[id].OnSensorDataObtained!;
+        }
+    }
+
+    public void DeactivateReceiver(int id)
+    {
+        foreach(var sensor in Sensors)
+        {
+            sensor.SensorDataObtained -= Receivers[id].OnSensorDataObtained!;
+        }
+    }
 
     public Task RunAsync()
     {

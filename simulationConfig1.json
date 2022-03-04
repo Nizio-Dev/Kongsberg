@@ -1,0 +1,38 @@
+{
+  "Sensors": [
+    {
+      "ID": 1,
+      "Type": "roll",
+      "MinValue": 0,
+      "MaxValue": 360,
+      "EncoderType": "fixed",
+      "Frequency": 1 //Hz
+    },
+    {
+      "ID": 2,
+      "Type": "pitch",
+      "MinValue": 0,
+      "MaxValue": 360,
+      "EncoderType": "fixed",
+      "Frequency": 2 //Hz
+    },
+    {
+      "ID": 3,
+      "Type": "yaw",
+      "MinValue": 0,
+      "MaxValue": 360,
+      "EncoderType": "fixed",
+      "Frequency": 1 //Hz
+    }
+  ],
+  "Receivers": [
+    {
+      "ID": 1,
+      "IsActive": true
+    },
+    {
+      "ID": 2,
+      "IsActive": true
+    }
+  ]
+}

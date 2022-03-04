@@ -1,15 +1,14 @@
 ﻿namespace kongsberg.Sensors;
 
-
-public enum ClassifierStates
+public class SensorDataObtainedEventArgs : EventArgs
 {
-    Normal,
-    Warning,
-    Alarm
+    public int Value { get; set;}
 }
 
 public class Sensor
 {   
+
+    public event EventHandler<SensorDataObtainedEventArgs>? SensorDataObtained;
 
     public int Id { get; }
     public string Type { get; } = "Unknown";
@@ -22,12 +21,6 @@ public class Sensor
     private Random _random = new Random();
     private const int _second = 1000;
 
-    private const float _warningThreshold = 0.50F;
-    private const float _alarmThreshold = 0.8F;
-
-    private readonly int _middlePoint;
-    private readonly int _distanceToMiddle;
-
     public Sensor(int id, string type, string encoderType, 
         int frequency, int minValue, int maxValue)
     {
@@ -37,35 +30,13 @@ public class Sensor
         Frequency = frequency;
         MinValue = minValue;
         MaxValue = maxValue;
-        _middlePoint = (minValue + maxValue) / 2;
-        _distanceToMiddle = maxValue-_middlePoint;
     }
 
-    private int Generate()
+    public int Generate()
     {
         return _random.Next(MinValue, MaxValue);
     }
     
-    // Czy sensor powinien się sam klasyfikować? 
-    private ClassifierStates Classify(int data) 
-    {
-
-        float distance;
-
-        if(data < _middlePoint)
-        {
-            distance = _middlePoint - data;
-        }
-        else
-        {
-            distance = data - _middlePoint;
-        }
-
-        return distance/_distanceToMiddle >= _alarmThreshold ? ClassifierStates.Alarm :
-        distance/_distanceToMiddle >= _warningThreshold ? ClassifierStates.Warning :
-        ClassifierStates.Normal;
-    }
-
     public async Task RunAsync()
     {
         IsRunning = true;
@@ -73,7 +44,8 @@ public class Sensor
         {
             while (IsRunning)
             {
-                OutputSignal();
+                var generatedData = Generate();
+                SensorDataObtained?.Invoke(this, new SensorDataObtainedEventArgs{Value = generatedData});
                 Thread.Sleep((int)((1.0f/Frequency)*_second));
             }
         }); 
@@ -82,15 +54,6 @@ public class Sensor
     public void Stop()
     {
         IsRunning = false;
-    }
-
-    private void OutputSignal()
-    {
-        int generatedValue = Generate();
-        ClassifierStates classifiedAs = Classify(generatedValue);
-        Console.WriteLine($"${EncoderType}, {Id}, {Type, 8}, {generatedValue, 6}, {classifiedAs, 7}");
-        Console.ResetColor();
-
     }
 
 }
