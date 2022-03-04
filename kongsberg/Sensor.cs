@@ -1,7 +1,7 @@
 ﻿namespace kongsberg.Sensors;
 
 
-enum ClassifierStates
+public enum ClassifierStates
 {
     Normal,
     Warning,
@@ -22,8 +22,8 @@ public class Sensor
     private Random _random = new Random();
     private const int _second = 1000;
 
-    private const float _warningThreshold = 0.65F;
-    private const float _alarmThreshold = 0.9F;
+    private const float _warningThreshold = 0.50F;
+    private const float _alarmThreshold = 0.8F;
 
     private readonly int _middlePoint;
     private readonly int _distanceToMiddle;
@@ -41,11 +41,12 @@ public class Sensor
         _distanceToMiddle = maxValue-_middlePoint;
     }
 
-    protected int Generate()
+    private int Generate()
     {
         return _random.Next(MinValue, MaxValue);
     }
     
+    // Czy sensor powinien się sam klasyfikować? 
     private ClassifierStates Classify(int data) 
     {
 
@@ -57,23 +58,22 @@ public class Sensor
         }
         else
         {
-            distance = MaxValue - data;
+            distance = data - _middlePoint;
         }
 
         return distance/_distanceToMiddle >= _alarmThreshold ? ClassifierStates.Alarm :
-            distance/_distanceToMiddle >= _warningThreshold ? ClassifierStates.Warning :
-            ClassifierStates.Normal;
+        distance/_distanceToMiddle >= _warningThreshold ? ClassifierStates.Warning :
+        ClassifierStates.Normal;
     }
 
     public async Task RunAsync()
     {
         IsRunning = true;
-
         await Task.Run(() =>
         {
             while (IsRunning)
             {
-                LogData();
+                OutputSignal();
                 Thread.Sleep((int)((1.0f/Frequency)*_second));
             }
         }); 
@@ -84,23 +84,14 @@ public class Sensor
         IsRunning = false;
     }
 
-    private void LogData()
+    private void OutputSignal()
     {
         int generatedValue = Generate();
         ClassifierStates classifiedAs = Classify(generatedValue);
-
-        if(classifiedAs == ClassifierStates.Alarm)
-        {
-            Console.ForegroundColor = ConsoleColor.DarkRed;
-        }
-        else if(classifiedAs == ClassifierStates.Warning)
-        {
-            Console.ForegroundColor = ConsoleColor.DarkYellow;
-        }
         Console.WriteLine($"${EncoderType}, {Id}, {Type, 8}, {generatedValue, 6}, {classifiedAs, 7}");
         Console.ResetColor();
-        
 
     }
+
 }
 
