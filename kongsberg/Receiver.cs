@@ -34,6 +34,7 @@ public class Receiver
                 $"{data.Value}, {classifiedAs}");
 
             Console.ResetColor();
+
         }
     }
 }
