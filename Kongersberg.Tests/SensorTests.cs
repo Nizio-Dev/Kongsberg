@@ -1,4 +1,4 @@
-using kongsberg.Sensors;
+using Kongsberg;
 using Xunit;
 
 namespace kongsberg.Tests;

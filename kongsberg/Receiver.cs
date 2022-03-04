@@ -1,6 +1,4 @@
-﻿using kongsberg.Sensors;
-using kongsberg.Classifier;
-using Kongsberg.Enum.ClassifierStates;
+﻿using Kongsberg.Enum;
 
 namespace Kongsberg;
 

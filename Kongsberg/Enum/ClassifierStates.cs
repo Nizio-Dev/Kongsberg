@@ -1,4 +1,4 @@
-﻿namespace Kongsberg.Enum.ClassifierStates;
+﻿namespace Kongsberg.Enum;
 public enum ClassifierStates
 {
     Normal,

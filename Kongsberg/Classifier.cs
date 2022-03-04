@@ -1,6 +1,6 @@
-﻿using Kongsberg.Enum.ClassifierStates;
+﻿using Kongsberg.Enum;
 
-namespace kongsberg.Classifier;
+namespace Kongsberg;
 
 
 public static class Classifier
@@ -10,15 +10,15 @@ public static class Classifier
     private const float _alarmThreshold = 0.8F;
 
 
-    public static ClassifierStates Classify(int data, int minValue, int maxValue) 
+    public static ClassifierStates Classify(int data, int minValue, int maxValue)
     {
 
         float distance;
 
         var middlePoint = (minValue + maxValue) / 2;
-        var distanceToMiddle = maxValue-middlePoint;
+        var distanceToMiddle = maxValue - middlePoint;
 
-        if(data < middlePoint)
+        if (data < middlePoint)
         {
             distance = middlePoint - data;
         }
@@ -27,8 +27,8 @@ public static class Classifier
             distance = data - middlePoint;
         }
 
-        return distance/distanceToMiddle >= _alarmThreshold ? ClassifierStates.Alarm :
-        distance/distanceToMiddle >= _warningThreshold ? ClassifierStates.Warning :
+        return distance / distanceToMiddle >= _alarmThreshold ? ClassifierStates.Alarm :
+        distance / distanceToMiddle >= _warningThreshold ? ClassifierStates.Warning :
         ClassifierStates.Normal;
     }
 }

@@ -1,12 +1,12 @@
-﻿namespace kongsberg.Sensors;
+﻿namespace Kongsberg;
 
 public class SensorDataObtainedEventArgs : EventArgs
 {
-    public int Value { get; set;}
+    public int Value { get; set; }
 }
 
 public class Sensor
-{   
+{
 
     public event EventHandler<SensorDataObtainedEventArgs>? SensorDataObtained;
 
@@ -21,7 +21,7 @@ public class Sensor
     private Random _random = new Random();
     private const int _second = 1000;
 
-    public Sensor(int id, string type, string encoderType, 
+    public Sensor(int id, string type, string encoderType,
         int frequency, int minValue, int maxValue)
     {
         Id = id;
@@ -36,7 +36,7 @@ public class Sensor
     {
         return _random.Next(MinValue, MaxValue);
     }
-    
+
     public async Task RunAsync()
     {
         IsRunning = true;
@@ -45,10 +45,10 @@ public class Sensor
             while (IsRunning)
             {
                 var generatedData = Generate();
-                SensorDataObtained?.Invoke(this, new SensorDataObtainedEventArgs{Value = generatedData});
-                Thread.Sleep((int)((1.0f/Frequency)*_second));
+                SensorDataObtained?.Invoke(this, new SensorDataObtainedEventArgs { Value = generatedData });
+                Thread.Sleep((int)(1.0f / Frequency * _second));
             }
-        }); 
+        });
     }
 
     public void Stop()

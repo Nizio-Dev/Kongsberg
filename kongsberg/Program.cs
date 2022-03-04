@@ -1,4 +1,4 @@
-﻿using kongsberg;
+﻿using Kongsberg;
 using Newtonsoft.Json.Linq;
 
 
