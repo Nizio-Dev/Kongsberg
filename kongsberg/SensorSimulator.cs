@@ -1,8 +1,6 @@
-﻿using kongsberg.Sensors;
-using Kongsberg;
-using Newtonsoft.Json.Linq;
+﻿using Newtonsoft.Json.Linq;
 
-namespace kongsberg;
+namespace Kongsberg;
 
 public class SensorSimulator
 {   
