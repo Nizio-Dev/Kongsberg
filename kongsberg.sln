@@ -5,7 +5,7 @@ VisualStudioVersion = 17.1.32210.238
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Kongsberg.Tests", "Kongersberg.Tests\Kongsberg.Tests.csproj", "{A78BFD5A-9A61-4BA7-9057-98A68D54AC77}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Kongsberg", "Kongsberg\Kongsberg.csproj", "{7A35E281-62EF-473A-88B1-A763F7BCB760}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Kongsberg", "Kongsberg\Kongsberg.csproj", "{61C1257F-41E5-4EBA-9308-A68FD72AB3C5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -17,10 +17,10 @@ Global
 		{A78BFD5A-9A61-4BA7-9057-98A68D54AC77}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A78BFD5A-9A61-4BA7-9057-98A68D54AC77}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A78BFD5A-9A61-4BA7-9057-98A68D54AC77}.Release|Any CPU.Build.0 = Release|Any CPU
-		{7A35E281-62EF-473A-88B1-A763F7BCB760}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{7A35E281-62EF-473A-88B1-A763F7BCB760}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{7A35E281-62EF-473A-88B1-A763F7BCB760}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{7A35E281-62EF-473A-88B1-A763F7BCB760}.Release|Any CPU.Build.0 = Release|Any CPU
+		{61C1257F-41E5-4EBA-9308-A68FD72AB3C5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{61C1257F-41E5-4EBA-9308-A68FD72AB3C5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{61C1257F-41E5-4EBA-9308-A68FD72AB3C5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{61C1257F-41E5-4EBA-9308-A68FD72AB3C5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
