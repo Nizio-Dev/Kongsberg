@@ -30,8 +30,8 @@ public class Receiver
                 Console.ForegroundColor = ConsoleColor.DarkYellow;
             }
 
-            Console.WriteLine($"${sensor.EncoderType}, {sensor.Id, 2}, {sensor.Type}, " +
-                $"{data.Value}, {classifiedAs}");
+            Console.WriteLine($"${sensor.EncoderType}, {sensor.Id}, {sensor.Type, 8}, " +
+                $"{data.Value, 5}, {classifiedAs, 7}");
 
             Console.ResetColor();
 
