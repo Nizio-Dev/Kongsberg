@@ -1,7 +1,9 @@
 using Kongsberg;
 using Xunit;
 
+
 namespace kongsberg.Tests;
+
 
 public class SensorTests
 {
@@ -24,9 +26,6 @@ public class SensorTests
         Assert.Equal(sensor.MinValue, testMin);
         Assert.Equal(sensor.MaxValue, testMax);
     }
-
-    
-
 /*    // Testy wartoœci granicznych dla klasyfikacji
     [Fact]
     public void LogData_0To100Data0_GivesAlarm()

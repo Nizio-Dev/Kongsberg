@@ -1,13 +1,14 @@
 ﻿namespace Kongsberg;
 
+
 public class SensorDataObtainedEventArgs : EventArgs
 {
     public int Value { get; set; }
 }
 
+
 public class Sensor
 {
-
     public event EventHandler<SensorDataObtainedEventArgs>? SensorDataObtained;
 
     public int Id { get; }
@@ -21,6 +22,7 @@ public class Sensor
     private Random _random = new Random();
     private const int _second = 1000;
 
+
     public Sensor(int id, string type, string encoderType,
         int frequency, int minValue, int maxValue)
     {
@@ -32,10 +34,12 @@ public class Sensor
         MaxValue = maxValue;
     }
 
+
     public int Generate()
     {
         return _random.Next(MinValue, MaxValue);
     }
+
 
     public async Task RunAsync()
     {
@@ -51,10 +55,9 @@ public class Sensor
         });
     }
 
+
     public void Stop()
     {
         IsRunning = false;
     }
-
 }
-

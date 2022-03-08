@@ -1,11 +1,11 @@
 ﻿using Kongsberg.Enum;
 
+
 namespace Kongsberg;
 
 
 public static class Classifier
 {
-
     private const float _warningThreshold = 0.50F;
     private const float _alarmThreshold = 0.8F;
 

@@ -1,10 +1,11 @@
 ﻿using Newtonsoft.Json.Linq;
 
+
 namespace Kongsberg;
+
 
 public class SensorSimulator
 {   
-
     List<Sensor> Sensors { get; } = new List<Sensor>();
     List<Receiver> Receivers { get; } = new List<Receiver>();
 
@@ -17,7 +18,6 @@ public class SensorSimulator
                 (int)sensor["MinValue"]!, (int)sensor["MaxValue"]!));
         }
 
-
         foreach(var receiver in data["Receivers"]!)
         {
             var newReceiver = new Receiver((int)receiver["ID"]!);
@@ -29,10 +29,10 @@ public class SensorSimulator
                 {
                     sensor.SensorDataObtained += newReceiver.OnSensorDataObtained!;
                 }
-            }
-            
+            }  
         }
     }
+
 
     public void ActivateReceiver(int id)
     {
@@ -42,6 +42,7 @@ public class SensorSimulator
         }
     }
 
+
     public void DeactivateReceiver(int id)
     {
         foreach(var sensor in Sensors)
@@ -49,6 +50,7 @@ public class SensorSimulator
             sensor.SensorDataObtained -= Receivers[id].OnSensorDataObtained!;
         }
     }
+
 
     public Task RunAsync()
     {

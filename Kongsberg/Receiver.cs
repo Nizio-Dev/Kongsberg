@@ -1,16 +1,19 @@
 ﻿using Kongsberg.Enum;
 
+
 namespace Kongsberg;
+
 
 public class Receiver
 {
-
     public int Id { get; }
+
 
     public Receiver(int id)
     {
         Id = id;
     }
+
 
     public void OnSensorDataObtained(object source, SensorDataObtainedEventArgs eventArgs)
     {
@@ -34,7 +37,6 @@ public class Receiver
                 $"{data.Value, 5}, {classifiedAs, 7}");
 
             Console.ResetColor();
-
         }
     }
 }
